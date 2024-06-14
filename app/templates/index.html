@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Activity Recognition with Healthy Older People Using a Batteryless Wearable Sensor</h1>
+        <form id="prediction-form">
+            <label for="time">Time (s):</label>
+            <input type="text" id="time" name="time" required><br>
+            
+            <label for="acc_front">Frontal Acceleration (G):</label>
+            <input type="text" id="acc_front" name="acc_front" required><br>
+            
+            <label for="acc_vert">Vertical Acceleration (G):</label>
+            <input type="text" id="acc_vert" name="acc_vert" required><br>
+            
+            <label for="acc_lat">Lateral Acceleration (G):</label>
+            <input type="text" id="acc_lat" name="acc_lat" required><br>
+            
+            <label for="sensor_id">Sensor ID:</label>
+            <input type="number" id="sensor_id" name="sensor_id" required><br>
+            
+            <label for="rssi">RSSI:</label>
+            <input type="text" id="rssi" name="rssi" required><br>
+            
+            <label for="phase">Phase:</label>
+            <input type="text" id="phase" name="phase" required><br>
+            
+            <label for="frequency">Frequency:</label>
+            <input type="text" id="frequency" name="frequency" required><br>
+            
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const data = {
+                time: parseFloat(document.getElementById('time').value),
+                acc_front: parseFloat(document.getElementById('acc_front').value),
+                acc_vert: parseFloat(document.getElementById('acc_vert').value),
+                acc_lat: parseFloat(document.getElementById('acc_lat').value),
+                sensor_id: parseInt(document.getElementById('sensor_id').value),
+                rssi: parseFloat(document.getElementById('rssi').value),
+                phase: parseFloat(document.getElementById('phase').value),
+                frequency: parseFloat(document.getElementById('frequency').value)
+            };
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Predicted Activity: ${data.activity}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
