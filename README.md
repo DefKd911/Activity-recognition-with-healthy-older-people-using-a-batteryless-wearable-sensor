@@ -17,10 +17,11 @@ Most falls of the elderly occur around the bed and the chair area, both in resid
 ![image](https://github.com/DefKd911/Activity-recognition-with-healthy-older-people-using-a-batteryless-wearable-sensor/assets/172142546/683c63aa-1f55-45b4-ae58-ea42ffe8ac46)
 # Dataset Pre-Processing 
 The dataset provides 60 *.csv files for room 2 and 28 *.csv files for room 2. Each *.csv file includes the eight features from the W2ISP sensor and the RFID reader and the label for each record. Data is handled by removing outliers for model training. 
-![image](https://github.com/DefKd911/Activity-recognition-with-healthy-older-people-using-a-batteryless-wearable-sensor/assets/172142546/8476b1c0-15fb-42be-bd31-1b369d4d5e58)\
 # MODEL training
 A total of 6 classification algorithms have been employed namely:  SVM,KNN,multinomial Logistic Regression,XGboost,Random Forest classifier  
 However only the Random Forest ensemble algorithm that achieved the highest performance with accuracy of : 99.086% 
+
+
 HYPERPARAMETER TUNING : we have chosen the combination of n-fold Cross Validation and Grid Search, this is one of the most 
 widely strategies used in ML.
 
